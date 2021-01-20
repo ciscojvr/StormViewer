@@ -30,7 +30,9 @@ class ViewController: UITableViewController {
     
         pictures.sort()
         
-        print(pictures)
+//        print(pictures)
+        
+        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .action, target: self, action: #selector(suggestTapped))
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -50,6 +52,14 @@ class ViewController: UITableViewController {
             vc.totalPictures = pictures.count
             navigationController?.pushViewController(vc, animated: true)
         }
+    }
+    
+    @objc func suggestTapped() {
+        let shareLink = "Check out this app: https://github.com/ciscojvr/StormViewer"
+        
+        let vc = UIActivityViewController(activityItems: [shareLink], applicationActivities: [])
+        vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem
+        present(vc, animated: true)
     }
 
 }
