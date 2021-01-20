@@ -39,12 +39,12 @@ class DetailViewController: UIViewController {
     }
     
     @objc func shareTapped() {
-        guard let image = imageView.image?.jpegData(compressionQuality: 0.8) else {
+        guard let image = imageView.image?.jpegData(compressionQuality: 0.8), let imageName = selectedImage else {
             print("No image found")
             return
         }
         
-        let vc = UIActivityViewController(activityItems: [image], applicationActivities: [])
+        let vc = UIActivityViewController(activityItems: [imageName, image], applicationActivities: [])
         vc.popoverPresentationController?.barButtonItem = navigationItem.rightBarButtonItem // without this code our app will crash on iPad. On iPad the pop over will be shown attached to the bar button item so users can see where it came from and tap away to dismiss it.
         present(vc, animated: true)
     }
